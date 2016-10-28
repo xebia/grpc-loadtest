@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_package = "ex.grpc";
+option objc_class_prefix = "HSW";
+
+package device;
+
+service TemperatureService {
+  rpc set_temperature (Temperature) returns (Empty) {}
+  rpc get_temperature (Empty) returns (stream Temperature) {}
+}
+
+service UsageService {
+  rpc latest_electricity_usage (ElectricityUsage)  returns (Empty) {}
+  rpc latest_gas_usage (GasUsage) returns (Empty) {}
+}
+
+message Empty {
+}
+
+message Temperature {
+  float celcius = 1;  
+}
+
+message ElectricityUsage {
+  int64 kw = 1;
+}
+
+message GasUsage {
+  int64 m3 = 1;
+}
+

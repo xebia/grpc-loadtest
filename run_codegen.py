@@ -4,9 +4,9 @@ from grpc.tools import protoc
 protoc.main(
     (
 	'',
-	'-I./proto',
-	'--python_out=.',
-	'--grpc_python_out=.',
-	'./proto/device.proto',
+	'-I./src/proto',
+	'--python_out=./src/python',
+	'--grpc_python_out=./src/python',
+	'./src/proto/device.proto',
     )
 )
