@@ -16,7 +16,7 @@ class TemperatureService(device_pb2.TemperatureServiceServicer):
     def get_temperature(self, request, context):
 	while True:
 		temperature = temperature_db[request.device] if request.device in temperature_db else 10.0
-		yield device_pb2.Temperature(device=request.device, celcius=temperature + random.random())
+		yield device_pb2.Temperature(device=request.device, celcius=temperature + random.random() - 0.5)
 		time.sleep(2)
 
 class UsageService(device_pb2.UsageServiceServicer):
