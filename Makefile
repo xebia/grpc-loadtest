@@ -2,7 +2,7 @@
 
 
 all: src/proto/device.proto
-	./run_codegen.py
+	bin/run-codegen
 
 install:
 	virtualenv grpc
