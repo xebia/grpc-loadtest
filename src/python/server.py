@@ -14,11 +14,11 @@ class TemperatureService(device_pb2.TemperatureServiceServicer):
 	yield 20.0 + random.random()
 
 class UsageService(device_pb2.UsageServiceServicer):
-  def latest_electricity_usage(self, request, context):
-    print request
+    def latest_electricity_usage(self, request, context):
+	print request
 
-  def latest_gas_usage(self, request, context):
-    print request
+    def latest_gas_usage(self, request, context):
+	print request
 
 
 
