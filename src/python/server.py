@@ -9,9 +9,10 @@ import device_pb2
 class TemperatureService(device_pb2.TemperatureServiceServicer):
     def set_temperature(self, request, context):
 	print request
+        return device_pb2.Empty()
 
     def get_temperature(self, request, context):
-	yield 20.0 + random.random()
+	yield device_pb2(celcius=20.0 + random.random())
 
 class UsageService(device_pb2.UsageServiceServicer):
     def latest_electricity_usage(self, request, context):
