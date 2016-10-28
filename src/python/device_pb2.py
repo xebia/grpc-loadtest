@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='device.proto',
   package='device',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x64\x65vice.proto\x12\x06\x64\x65vice\"\x07\n\x05\x45mpty\"\x1e\n\x0bTemperature\x12\x0f\n\x07\x63\x65lcius\x18\x01 \x01(\x02\"\x1e\n\x10\x45lectricityUsage\x12\n\n\x02kw\x18\x01 \x01(\x03\"\x16\n\x08GasUsage\x12\n\n\x02m3\x18\x01 \x01(\x03\x32\x88\x01\n\x12TemperatureService\x12\x37\n\x0fset_temperature\x12\x13.device.Temperature\x1a\r.device.Empty\"\x00\x12\x39\n\x0fget_temperature\x12\r.device.Empty\x1a\x13.device.Temperature\"\x00\x30\x01\x32\x8c\x01\n\x0cUsageService\x12\x45\n\x18latest_electricity_usage\x12\x18.device.ElectricityUsage\x1a\r.device.Empty\"\x00\x12\x35\n\x10latest_gas_usage\x12\x10.device.GasUsage\x1a\r.device.Empty\"\x00\x42\x0f\n\x07\x65x.grpc\xa2\x02\x03HSWb\x06proto3')
+  serialized_pb=_b('\n\x0c\x64\x65vice.proto\x12\x06\x64\x65vice\"\x07\n\x05\x45mpty\"\x18\n\x06\x44\x65vice\x12\x0e\n\x06\x64\x65vice\x18\x01 \x01(\t\".\n\x0bTemperature\x12\x0e\n\x06\x64\x65vice\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x65lcius\x18\x02 \x01(\x02\".\n\x10\x45lectricityUsage\x12\x0e\n\x06\x64\x65vice\x18\x01 \x01(\t\x12\n\n\x02kw\x18\x02 \x01(\x03\"&\n\x08GasUsage\x12\x0e\n\x06\x64\x65vice\x18\x01 \x01(\t\x12\n\n\x02m3\x18\x02 \x01(\x03\x32\x89\x01\n\x12TemperatureService\x12\x37\n\x0fset_temperature\x12\x13.device.Temperature\x1a\r.device.Empty\"\x00\x12:\n\x0fget_temperature\x12\x0e.device.Device\x1a\x13.device.Temperature\"\x00\x30\x01\x32\x8c\x01\n\x0cUsageService\x12\x45\n\x18latest_electricity_usage\x12\x18.device.ElectricityUsage\x1a\r.device.Empty\"\x00\x12\x35\n\x10latest_gas_usage\x12\x10.device.GasUsage\x1a\r.device.Empty\"\x00\x42\x0f\n\x07\x65x.grpc\xa2\x02\x03HSWb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -50,17 +50,17 @@ _EMPTY = _descriptor.Descriptor(
 )
 
 
-_TEMPERATURE = _descriptor.Descriptor(
-  name='Temperature',
-  full_name='device.Temperature',
+_DEVICE = _descriptor.Descriptor(
+  name='Device',
+  full_name='device.Device',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='celcius', full_name='device.Temperature.celcius', index=0,
-      number=1, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='device', full_name='device.Device.device', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -77,7 +77,45 @@ _TEMPERATURE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=33,
-  serialized_end=63,
+  serialized_end=57,
+)
+
+
+_TEMPERATURE = _descriptor.Descriptor(
+  name='Temperature',
+  full_name='device.Temperature',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='device', full_name='device.Temperature.device', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='celcius', full_name='device.Temperature.celcius', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=59,
+  serialized_end=105,
 )
 
 
@@ -89,8 +127,15 @@ _ELECTRICITYUSAGE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='kw', full_name='device.ElectricityUsage.kw', index=0,
-      number=1, type=3, cpp_type=2, label=1,
+      name='device', full_name='device.ElectricityUsage.device', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='kw', full_name='device.ElectricityUsage.kw', index=1,
+      number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -107,8 +152,8 @@ _ELECTRICITYUSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=65,
-  serialized_end=95,
+  serialized_start=107,
+  serialized_end=153,
 )
 
 
@@ -120,8 +165,15 @@ _GASUSAGE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='m3', full_name='device.GasUsage.m3', index=0,
-      number=1, type=3, cpp_type=2, label=1,
+      name='device', full_name='device.GasUsage.device', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='m3', full_name='device.GasUsage.m3', index=1,
+      number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -138,11 +190,12 @@ _GASUSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=97,
-  serialized_end=119,
+  serialized_start=155,
+  serialized_end=193,
 )
 
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
+DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
 DESCRIPTOR.message_types_by_name['Temperature'] = _TEMPERATURE
 DESCRIPTOR.message_types_by_name['ElectricityUsage'] = _ELECTRICITYUSAGE
 DESCRIPTOR.message_types_by_name['GasUsage'] = _GASUSAGE
@@ -153,6 +206,13 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
   # @@protoc_insertion_point(class_scope:device.Empty)
   ))
 _sym_db.RegisterMessage(Empty)
+
+Device = _reflection.GeneratedProtocolMessageType('Device', (_message.Message,), dict(
+  DESCRIPTOR = _DEVICE,
+  __module__ = 'device_pb2'
+  # @@protoc_insertion_point(class_scope:device.Device)
+  ))
+_sym_db.RegisterMessage(Device)
 
 Temperature = _reflection.GeneratedProtocolMessageType('Temperature', (_message.Message,), dict(
   DESCRIPTOR = _TEMPERATURE,
@@ -200,7 +260,7 @@ class TemperatureServiceStub(object):
         )
     self.get_temperature = channel.unary_stream(
         '/device.TemperatureService/get_temperature',
-        request_serializer=Empty.SerializeToString,
+        request_serializer=Device.SerializeToString,
         response_deserializer=Temperature.FromString,
         )
 
@@ -227,7 +287,7 @@ def add_TemperatureServiceServicer_to_server(servicer, server):
       ),
       'get_temperature': grpc.unary_stream_rpc_method_handler(
           servicer.get_temperature,
-          request_deserializer=Empty.FromString,
+          request_deserializer=Device.FromString,
           response_serializer=Temperature.SerializeToString,
       ),
   }
@@ -253,7 +313,7 @@ class BetaTemperatureServiceStub(object):
 
 def beta_create_TemperatureService_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
   request_deserializers = {
-    ('device.TemperatureService', 'get_temperature'): Empty.FromString,
+    ('device.TemperatureService', 'get_temperature'): Device.FromString,
     ('device.TemperatureService', 'set_temperature'): Temperature.FromString,
   }
   response_serializers = {
@@ -270,7 +330,7 @@ def beta_create_TemperatureService_server(servicer, pool=None, pool_size=None, d
 
 def beta_create_TemperatureService_stub(channel, host=None, metadata_transformer=None, pool=None, pool_size=None):
   request_serializers = {
-    ('device.TemperatureService', 'get_temperature'): Empty.SerializeToString,
+    ('device.TemperatureService', 'get_temperature'): Device.SerializeToString,
     ('device.TemperatureService', 'set_temperature'): Temperature.SerializeToString,
   }
   response_deserializers = {

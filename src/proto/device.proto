@@ -7,7 +7,7 @@ package device;
 
 service TemperatureService {
   rpc set_temperature (Temperature) returns (Empty) {}
-  rpc get_temperature (Empty) returns (stream Temperature) {}
+  rpc get_temperature (Device) returns (stream Temperature) {}
 }
 
 service UsageService {
@@ -18,15 +18,22 @@ service UsageService {
 message Empty {
 }
 
+message Device {
+   string device = 1;
+}
+
 message Temperature {
-  float celcius = 1;  
+  string device = 1;
+  float celcius = 2;  
 }
 
 message ElectricityUsage {
-  int64 kw = 1;
+  string device = 1;
+  int64 kw = 2;
 }
 
 message GasUsage {
-  int64 m3 = 1;
+  string device = 1;
+  int64 m3 = 2;
 }
 

@@ -6,14 +6,17 @@ import grpc
 import device_pb2
 
 
+temperature_db = {}
+
 class TemperatureService(device_pb2.TemperatureServiceServicer):
     def set_temperature(self, request, context):
-	print request
+	temperature_db[request.device] = request.celcius
         return device_pb2.Empty()
 
     def get_temperature(self, request, context):
 	while True:
-		yield device_pb2.Temperature(celcius=20.0 + random.random())
+		temperature = temperature_db[request.device] if request.device in temperature_db else 10.0
+		yield device_pb2.Temperature(celcius=temperature + random.random())
 		time.sleep(2)
 
 class UsageService(device_pb2.UsageServiceServicer):
