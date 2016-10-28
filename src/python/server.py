@@ -19,9 +19,11 @@ class TemperatureService(device_pb2.TemperatureServiceServicer):
 class UsageService(device_pb2.UsageServiceServicer):
     def latest_electricity_usage(self, request, context):
 	print request
+        return device_pb2.Empty()
 
     def latest_gas_usage(self, request, context):
 	print request
+        return device_pb2.Empty()
 
 
 
