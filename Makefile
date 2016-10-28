@@ -9,4 +9,4 @@ src/python/device_pb2.py: src/proto/device.proto
 install:
 	virtualenv grpc
 	. grpc/bin/activate && python -m pip install --upgrade pip
-	. grpc/bin/activate && pip install -r requirements.txt
+	. grpc/bin/activate && pip install -r src/python/requirements.txt
