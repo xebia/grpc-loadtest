@@ -1,7 +1,9 @@
 .PHONY:	install
 
 
-all: src/proto/device.proto
+all: src/python/device_pb2.py
+
+src/python/device_pb2.py: src/proto/device.proto
 	bin/run-codegen
 
 install:
