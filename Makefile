@@ -5,7 +5,7 @@ src/python/device_pb2.py: src/proto/device.proto
 	. grpc/bin/activate && bin/run-codegen
 
 src/golang/device/device.pb.go: src/proto/device.proto
-	bin/golang-codegen
+	protoc -I src/proto src/proto/device.proto --go_out=plugins=grpc:src/golang/device
 
 .PHONY:	install
 install:
