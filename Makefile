@@ -1,11 +1,13 @@
-.PHONY:	install
-
-
-all: src/python/device_pb2.py
+.PHONY: all
+all: src/python/device_pb2.py src/golang/device/device.pb.go
 
 src/python/device_pb2.py: src/proto/device.proto
-	bin/run-codegen
+	. grpc/bin/activate && bin/run-codegen
 
+src/golang/device/device.pb.go: src/proto/device.proto
+	bin/golang-codegen
+
+.PHONY:	install
 install:
 	virtualenv grpc
 	. grpc/bin/activate && python -m pip install --upgrade pip
