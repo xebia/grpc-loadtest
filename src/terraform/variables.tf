@@ -2,12 +2,16 @@ variable "region" {
   default = "europe-west1"
 }
 
-variable "zones" {
-  default = ["europe-west1-a", "europe-west1-b", "europe-west1-c"]
+variable "zone" {
+  default = "europe-west1-b"
+}
+
+variable "name" {
+  default = "gke-cluster"
 }
 
 variable "instance-type" {
-  default = "f1-micro"
+  default = "n1-standard-1"
 }
 
 variable "disk-size" {
