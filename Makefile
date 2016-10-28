@@ -10,3 +10,4 @@ install:
 	virtualenv grpc
 	. grpc/bin/activate && python -m pip install --upgrade pip
 	. grpc/bin/activate && pip install -r src/python/requirements.txt
+	test $$(uname) == "Darwin" && brew install protobuf || echo ok
