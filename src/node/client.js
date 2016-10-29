@@ -1,26 +1,25 @@
-var PROTO_PATH = __dirname + '/../proto/device.proto';
+'use strict';
 
-var grpc = require('grpc');
-var uuid = require('node-uuid');
+const grpc = require('grpc');
+const uuid = require('node-uuid');
 
-var device_proto = grpc.load(PROTO_PATH).device;
+const PROTO_PATH = __dirname + '/../proto/device.proto';
+const device_proto = grpc.load(PROTO_PATH).device;
 
 function main() {
-  var device = uuid.v1();
-  var client = new device_proto.TemperatureService('localhost:50051',
-                                       grpc.credentials.createInsecure())
+  const device = uuid.v1();
+  const client = new device_proto.TemperatureService('localhost:50051', grpc.credentials.createInsecure())
 
-  client.setTemperature({device: device, celcius: 22.0 }, function(err, response) {
-    if(err) {
-       console.log('set temperature failed', err);
+  client.setTemperature({ device: device, celcius: 22.0 }, (err, response) => {
+    if (err) {
+      console.log('set temperature failed', err);
     }
-  });
 
-  call = client.getTemperature({device: device});
-  call.on('data', function(temperature) {
-	console.log(temperature);
+    const call = client.getTemperature({ device: device });
+    call.on('data', temperature => console.log(temperature));
+    call.on('end', () =>  console.log('end'));
+    call.on('error', console.error);
   });
-  call.on('end', function() { console.log('end'); });
 }
 
 main();
