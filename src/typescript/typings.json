@@ -1,0 +1,10 @@
+{
+  "name": "grpc-loadtest",
+  "globalDependencies": {
+    "node": "registry:env/node#6.0.0+20161019193037"
+  },
+  "dependencies": {
+    "bluebird": "registry:npm/bluebird#3.4.1+20160909132857",
+    "node-uuid": "registry:npm/node-uuid#1.4.7+20160723033700"
+  }
+}

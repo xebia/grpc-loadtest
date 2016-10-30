@@ -1,0 +1,26 @@
+{
+  "name": "grpc-loadtest",
+  "version": "1.0.0",
+  "description": "Simple load test for a gRPC server",
+  "main": "client.js",
+  "repository": {
+    "url": "https://github.com/xebia/grpc-loadtest",
+    "type": "git"
+  },
+  "author": "Mark van Holsteijn, Adriaan Thomas",
+  "license": "MIT",
+  "scripts": {
+    "install-deps": "typings install",
+    "compile": "tsc",
+    "build": "yarn run install-deps && yarn run tsc"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "grpc": "^1.0.1",
+    "node-uuid": "^1.4.7"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.6",
+    "typings": "^1.5.0"
+  }
+}
