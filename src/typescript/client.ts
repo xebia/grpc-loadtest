@@ -1,5 +1,5 @@
 import * as grpc from "grpc";
-import * as Bluebird from "bluebird";
+import * as BBPromise from "bluebird";
 import * as uuid from "node-uuid";
 import { join } from "path";
 import { TemperatureServiceAsync } from "./grpc-async";
@@ -9,12 +9,12 @@ const deviceProto = grpc.load(PROTO_PATH).device;
 
 async function main() {
     const device = uuid.v1();
-    const client = Bluebird.promisifyAll(
+    const client = BBPromise.promisifyAll(
         new deviceProto.TemperatureService("localhost:50051", grpc.credentials.createInsecure())
     ) as TemperatureServiceAsync;
 
     await client.setTemperatureAsync({ device, celcius: 22.0 });
-    await new Bluebird((resolve, reject) => {
+    await new BBPromise((resolve, reject) => {
         const call = client.getTemperature({ device });
         call.on("data", console.log);
         call.on("end", resolve);

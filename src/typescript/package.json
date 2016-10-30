@@ -1,8 +1,7 @@
 {
   "name": "grpc-loadtest",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Simple load test for a gRPC server",
-  "main": "client.js",
   "repository": {
     "url": "https://github.com/xebia/grpc-loadtest",
     "type": "git"
@@ -12,7 +11,8 @@
   "scripts": {
     "install-deps": "typings install",
     "compile": "tsc",
-    "build": "yarn run install-deps && yarn run tsc"
+    "build": "yarn run install-deps && yarn run tsc",
+    "start": "node out/client"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

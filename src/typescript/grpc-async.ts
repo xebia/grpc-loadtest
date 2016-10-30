@@ -1,6 +1,6 @@
 import * as grpc from "grpc";
-import * as Bluebird from "bluebird";
+import * as BBPromise from "bluebird";
 
 export interface TemperatureServiceAsync extends grpc.TemperatureService {
-    setTemperatureAsync(temperature: grpc.Temperature): Bluebird<grpc.Empty>;
+    setTemperatureAsync(temperature: grpc.Temperature): BBPromise<grpc.Empty>;
 }

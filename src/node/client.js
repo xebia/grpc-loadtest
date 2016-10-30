@@ -1,22 +1,22 @@
 'use strict';
 
 const grpc = require('grpc');
+const BBPromise = require('bluebird');
 const uuid = require('node-uuid');
-const Promise = require('bluebird');
+const join = require('path').join;
 
 const PROTO_PATH = __dirname + '/../proto/device.proto';
 const device_proto = grpc.load(PROTO_PATH).device;
 
 function main() {
   const device = uuid.v1();
-  const client = Promise.promisifyAll(
+  const client = BBPromise.promisifyAll(
     new device_proto.TemperatureService('localhost:50051', grpc.credentials.createInsecure())
   );
 
-  client.setTemperatureAsync({ device, celcius: 22.0 })
-    .catch(e => console.error('set temperature failed', e))
+  return client.setTemperatureAsync({ device, celcius: 22.0 })
     .then(() => {
-      return new Promise((resolve, reject) => {
+      return new BBPromise((resolve, reject) => {
         const call = client.getTemperature({ device });
         call.on('data', console.log);
         call.on('end', resolve);
@@ -24,7 +24,6 @@ function main() {
       });
     })
     .then(() => console.log('end'))
-    .catch(e => console.error('get temperature failed', e));
 }
 
-main();
+main().catch(console.error);
