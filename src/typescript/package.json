@@ -11,7 +11,7 @@
   "scripts": {
     "install-deps": "typings install",
     "compile": "tsc",
-    "build": "yarn run install-deps && yarn run tsc",
+    "build": "yarn run install-deps && yarn run compile",
     "start": "node out/client"
   },
   "dependencies": {
