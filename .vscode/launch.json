@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+		{
+			"name": "Launch Typescript",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/src/typescript/client.ts",
+			"stopOnEntry": false,
+			"args": [],
+			"cwd": "${workspaceRoot}/src/typescript",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			},
+			"sourceMaps": true,
+			"outDir": "${workspaceRoot}/src/typescript/out"
+		},
+		{
+			"name": "Launch NodeJS",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/src/node/client.js",
+			"stopOnEntry": false,
+			"args": [],
+			"cwd": "${workspaceRoot}/src/node",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			}
+		}
+    ]
+}
