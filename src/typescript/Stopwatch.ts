@@ -1,4 +1,4 @@
-const FailedTaskNameSuffix = " (failed)";
+const FailedTaskNameRemark = "failed";
 
 interface PromiseLike<TValue> {
     then<TNewValue>(p: (value: TValue) => TNewValue): PromiseLike<TNewValue>,
@@ -18,7 +18,7 @@ export function run<T>(name: string, task: () => T): T {
         sw.stop();
         return result;
     } catch (e) {
-        sw.stop(FailedTaskNameSuffix);
+        sw.stop(FailedTaskNameRemark);
         throw e;
     }
 }
@@ -30,7 +30,7 @@ export function runAsync<TValue, TPromise extends PromiseLike<TValue>>(name: str
 
     result
         .then(() => sw.stop())
-        .catch(() => sw.stop(FailedTaskNameSuffix));
+        .catch(() => sw.stop(FailedTaskNameRemark));
 
     return result;
 }
