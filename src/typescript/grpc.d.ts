@@ -10,10 +10,10 @@ declare module "grpc" {
     interface Creds {}
 
     interface ProtoDescriptor {
-        device: DeviceProto;
+        device: DeviceClient;
     }
 
-    interface DeviceProto {
+    interface DeviceClient {
         TemperatureService: typeof TemperatureService;
     }
 
@@ -25,7 +25,7 @@ declare module "grpc" {
     }
 
     interface Device {
-        device?: string;
+        device: string;
     }
 
     interface Temperature extends Device {
