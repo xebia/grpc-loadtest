@@ -13,6 +13,8 @@ class SimulatedDevice
 
     private static readonly Random rnd = new Random();
 
+    private readonly Channel channel;
+
     private readonly TemperatureService.TemperatureServiceClient client;
 
     public string ID
@@ -24,16 +26,17 @@ class SimulatedDevice
     {
         ID = $"device-{nextId++}";
 
-        var channel = new Channel(endpoint, ChannelCredentials.Insecure);
+        channel = new Channel(endpoint, ChannelCredentials.Insecure);
         client = new TemperatureService.TemperatureServiceClient(channel);
     }
 
     public async Task Run(uint attempts, TimeSpan timeBetweenAttempts)
     {
         var celcius = RandomTemperature();
+        var cancelSource = new CancellationTokenSource();
 
         await SetTemperatureAsync(celcius);
-        var getTemps = GetTemperatures();
+        var getTemps = GetTemperatures(cancelSource.Token);
 
         for (var i = 1; i < attempts; i++)
         {
@@ -47,21 +50,14 @@ class SimulatedDevice
             );
         }
         Console.WriteLine($"{ID}: done setting temperatures");
+        cancelSource.Cancel();
         await getTemps;
+        await channel.ShutdownAsync();
         Console.WriteLine($"{ID}: ALL DONE");
     }
 
     private async Task<Empty> SetTemperatureAsync(float celcius)
     {
-        // const tempStream = tempSvc.getTemperature({device: this.id});
-        // const dataStopwatch = stopwatch.startStopwatch(`${this.id}: getTemperature`);
-        // tempStream.on("data", c => console.log(`${c.device}: Received temp: ${c.celcius} after ${dataStopwatch.lap(false) / 1000} s`));
-        // tempStream.on("end", () => dataStopwatch.stop());
-        // tempStream.on("error", err => {
-        //     dataStopwatch.stop(" (failed)");
-        //     console.error(`${this.id}: error:`, err);
-        // });
-
         Console.WriteLine($"{ID}: Setting temperature to {celcius}");
         return await StopwatchExtension.RunAsync<Empty>($"{ID} setTemperature {celcius}",
             () => client.set_temperatureAsync(new Temperature {
@@ -71,14 +67,23 @@ class SimulatedDevice
         );
     }
 
-    private async Task GetTemperatures()
+    private async Task GetTemperatures(CancellationToken token)
     {
-        var stream = client.get_temperature(new Device.Device { Device_ = ID }).ResponseStream;
         var sw = Stopwatch.StartNew();
-        while (await stream.MoveNext(CancellationToken.None))
+        using (var call = client.get_temperature(new Device.Device { Device_ = ID }))
+        using (var stream = call.ResponseStream)
         {
-            Console.WriteLine($"{ID}: received temperature {stream.Current.Celcius} (gap: {sw.Elapsed}).");
-            sw.Restart();
+            // For some reason we cannot use a cancellable token here, so handle cancellation manually...
+            while (await stream.MoveNext(CancellationToken.None))
+            {
+                Console.WriteLine($"{ID}: received temperature {stream.Current.Celcius} (gap: {sw.Elapsed}).");
+                sw.Restart();
+                if (token.IsCancellationRequested)
+                {
+                    Console.WriteLine("Cancelling GetTemperature");
+                    break;
+                }
+            }
         }
         Console.WriteLine($"{ID} end of temeperature stream ({sw.Elapsed} since last receive)");
     }

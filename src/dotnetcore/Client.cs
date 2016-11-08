@@ -37,7 +37,7 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             // Loop().Wait();
-            RunSimulator(10);
+            RunSimulator(9);
         }
     }
 }
